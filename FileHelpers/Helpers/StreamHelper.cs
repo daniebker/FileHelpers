@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -39,6 +41,7 @@ namespace FileHelpers
 
                 try {
                     fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    
                     // read the file backwards using SeekOrigin.Begin...
                     long offset;
                     for (offset = fs.Length - 1; offset >= 0; offset--) {
@@ -61,7 +64,6 @@ namespace FileHelpers
                             newline[count] = Convert.ToByte(ch);
                             count++;
                         }
-                        // Console.WriteLine(" value {0} count {1}\n", newline.Length, count);
 
                         fs.Write(newline, 0, count);
                     }

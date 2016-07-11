@@ -39,21 +39,15 @@ namespace FileHelpers
 
                 try {
                     fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-                    //bool CarriageReturn = false;
-                    //bool LineFeed = false;
-
                     // read the file backwards using SeekOrigin.Begin...
                     long offset;
                     for (offset = fs.Length - 1; offset >= 0; offset--) {
                         fs.Seek(offset, SeekOrigin.Begin);
                         int value = fs.ReadByte();
                         if (value == '\r') {
-                            // Console.Write("\\r");
                             //CarriageReturn = true;
                         }
                         else if (value == '\n') {
-                            // Console.Write("\\n");
                             //LineFeed = true;
                         }
                         else
@@ -61,19 +55,6 @@ namespace FileHelpers
                     }
                     if (offset >= 0) // read something else other than line ends...
                     {
-                        //LineEnd ending;
-
-                        //if( CarriageReturn )
-                        //    if( LineFeed )
-                        //        ending = LineEnd.Dos;
-                        //    else
-                        //        ending=LineEnd.Macintosh;
-                        //else
-                        //    if( LineFeed )
-                        //        ending=LineEnd.Unix;
-                        //else
-                        //        ending=LineEnd.other;
-
                         var newline = new byte[StringHelper.NewLine.Length];
                         int count = 0;
                         foreach (var ch in StringHelper.NewLine) {
